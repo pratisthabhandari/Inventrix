@@ -18,16 +18,15 @@ $pageTitle = "Analytics Overview";
 
 <body>
 
-<!-- Sidebar -->
+
 <div id="sidebar-container"></div>
 
-<!-- Main Content -->
 <div class="main-content">
 
-    <!-- Header -->
+  
     <?php include 'header.php'; ?>
 
-    <!-- Analytics -->
+
     <div class="analytics-overview">
 
         <div class="analytics-cards">
@@ -50,12 +49,12 @@ $pageTitle = "Analytics Overview";
     </div>
 
     <div class="footer">
-        © 2025 Inventora. All rights reserved.
+        © 2025 Invenrix. All rights reserved.
     </div>
 </div>
 
 <script>
-/* ---------------- SIDEBAR ---------------- */
+
 fetch('./sidebar.html')
 .then(res => res.text())
 .then(html => {
@@ -70,12 +69,12 @@ fetch('./sidebar.html')
     });
 });
 
-/* ---------------- CHART INSTANCES ---------------- */
+
 let categoryChartInstance;
 let supplierChartInstance;
 let stockChartInstance;
 
-/* ---------------- LOAD DASHBOARD DATA ---------------- */
+
 function loadDashboardCharts() {
     fetch('fetch_product.php')
     .then(res => res.json())
@@ -88,19 +87,19 @@ function loadDashboardCharts() {
             const stock = Number(p.stock || 0);
             if (isNaN(stock)) return;
 
-            /* ---- Stock by Category ---- */
+       
             categoryStock[p.category] = (categoryStock[p.category] || 0) + stock;
 
-            /* ---- Products by Supplier ---- */
+           
             supplierCount[p.supplier] = (supplierCount[p.supplier] || 0) + 1;
         });
 
-        /* Destroy old charts if exist */
+
         categoryChartInstance?.destroy();
         supplierChartInstance?.destroy();
         stockChartInstance?.destroy();
 
-        /* ---------------- CATEGORY CHART ---------------- */
+    
         categoryChartInstance = new Chart(
             document.getElementById('categoryChart'),
             {
@@ -132,7 +131,7 @@ function loadDashboardCharts() {
             }
         );
 
-        /* ---------------- SUPPLIER CHART ---------------- */
+     
         supplierChartInstance = new Chart(
             document.getElementById('supplierChart'),
             {
@@ -151,7 +150,7 @@ function loadDashboardCharts() {
             }
         );
 
-        /* ---------------- STOCK LEVEL CHART (Per Product) ---------------- */
+    
         const productLabels = products.map(p => p.product_name || 'Unnamed');
         const productStocks = products.map(p => Number(p.stock || 0));
 
@@ -191,17 +190,17 @@ function loadDashboardCharts() {
     });
 }
 
-/* ---------------- INITIAL LOAD ---------------- */
+
 loadDashboardCharts();
 
-/* ---------------- AUTO REFRESH FROM PRODUCT PAGE ---------------- */
+
 window.addEventListener("storage", e => {
     if (e.key === "dashboardRefresh") {
         loadDashboardCharts();
     }
 });
 
-/* ---------------- SAME TAB FALLBACK ---------------- */
+
 setInterval(() => {
     if (localStorage.getItem("dashboardRefresh")) {
         loadDashboardCharts();

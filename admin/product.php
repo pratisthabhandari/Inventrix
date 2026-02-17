@@ -9,7 +9,7 @@ $pageTitle = "Manage Products";?>
     <title>Inventrix - Products</title>
     <link rel="stylesheet" href="./css/product.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <title>Inventora – <?= $pageTitle ?></title>
+    <title>Inventrix – <?= $pageTitle ?></title>
 </head>
 <body>
     <!-- Sidebar -->
@@ -47,11 +47,11 @@ $pageTitle = "Manage Products";?>
         </div>
 
         <div class="footer">
-            <p>© 2025 Inventora. All rights reserved.</p>
+            <p>© 2025 Inventrix. All rights reserved.</p>
         </div>
     </div>
 
-    <!-- Product Modal -->
+   
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -102,13 +102,13 @@ $pageTitle = "Manage Products";?>
             <h2>Confirm Delete</h2>
             <p>Are you sure you want to delete this product?</p>
             <div class="modal-buttons">
-                <button class="btn" onclick="confirmDelete()">Yes, Delete</button>
+                <button class="btn" onclick="confirmDelete()">Delete</button>
                 <button class="btn cancel-btn" onclick="closeDeleteModal()">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Container -->
+
     <div id="toast-container"></div>
 
 <script>

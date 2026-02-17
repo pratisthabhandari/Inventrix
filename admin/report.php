@@ -143,7 +143,7 @@ $pageTitle = "Products Report";
         </div>
         
         <div class="footer">
-            <p>© 2025 Inventora. All rights reserved.</p>
+            <p>© 2025 Inventrix. All rights reserved.</p>
         </div>
     </div>
 

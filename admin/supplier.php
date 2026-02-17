@@ -9,12 +9,11 @@ $pageTitle = "Suppliers Details";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventora - Suppliers</title>
+    <title>Inventrix - Suppliers</title>
 
     <link rel="stylesheet" href="./css/supplier.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <title>Inventora – <?= $pageTitle ?></title>
-
+  
 </head>
 <body>
 
@@ -55,7 +54,7 @@ $pageTitle = "Suppliers Details";
     </div>
 
     <div class="footer">
-        <p>© 2025 Inventora. All rights reserved.</p>
+        <p>© 2025 Inventrix. All rights reserved.</p>
     </div>
 </div>
 

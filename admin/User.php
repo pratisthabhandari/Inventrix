@@ -19,10 +19,10 @@ $pageTitle = "Manage Users";
         <title>Inventrix – <?= $pageTitle ?></title>
 </head>
 <body>
-    <!-- Sidebar -->
+  
     <div id="sidebar-container"></div>
 
-    <!-- Main Content -->
+   
     <div class="main-content">
           <?php include 'header.php'; ?>
 
@@ -33,36 +33,7 @@ $pageTitle = "Manage Users";
 
             <div class="user-list"></div>
 
-            <!-- <div class="add-user-form">
-                <h3 class="form-title">Add New User</h3>
-                <form id="userForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="userName">Name</label>
-                            <input type="text" id="userName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userEmail">Email</label>
-                            <input type="email" id="userEmail" required>
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-row">
-                        <div class="form-group">
-                            <label for="userRole">Role</label>
-                            <select id="userRole" required>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="userPassword">Password</label>
-                            <input type="password" id="userPassword" required>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="reset" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn">Add User</button>
-                    </div> -->
+            
 
                     <div class="add-user-form">
     <h3 class="form-title">Add New User</h3>
@@ -83,7 +54,7 @@ $pageTitle = "Manage Users";
             <div class="form-group">
                 <label for="userRole">Role</label>
                 <select id="userRole" required>
-                    <option value="user">User</option>
+                    <option value="user">Seller</option>
                     <option value="admin">Admin</option>
                 </select>
                 <div class="form-error" id="errorRole">Please select a role.</div>
@@ -105,11 +76,11 @@ $pageTitle = "Manage Users";
         </div>
 
         <div class="footer">
-            <p>© 2025 Inventora. All rights reserved.</p>
+            <p>© 2025 Inventrix. All rights reserved.</p>
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
+   
     <div class="modal-overlay" id="deleteModal">
         <div class="modal">
             <h2>Confirm Deletion</h2>
@@ -121,7 +92,7 @@ $pageTitle = "Manage Users";
         </div>
     </div>
 
-    <!-- Edit User Modal -->
+ 
     <div class="modal-overlay" id="editModal">
         <div class="modal">
             <h2>Edit User</h2>
@@ -133,7 +104,7 @@ $pageTitle = "Manage Users";
                 <input type="email" id="editUserEmail" required>
                 <label>Role</label>
                 <select id="editUserRole" required>
-                    <option value="user">User</option>
+                    <option value="user">Seller</option>
                     <option value="admin">Admin</option>
                 </select>
                 <div class="modal-buttons">
@@ -186,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(err => console.error('Failed to load sidebar:', err));
 
 
-    // -------- User Management --------
+
     const userList = document.querySelector(".user-list");
     const userForm = document.getElementById("userForm");
     const userName = document.getElementById("userName");
