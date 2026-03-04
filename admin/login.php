@@ -6,10 +6,6 @@ ini_set('display_errors', 1);
 session_start();
 require_once 'db.php';
 
-/* ---------- SANITIZE FUNCTION ---------- */
-// function sanitize($data) {
-//     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
-// }
 
 /* ---------- DB CONNECTION ---------- */
 $db = new Database();
@@ -32,9 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
 
         $stmt = $conn->prepare(
-            "SELECT id, full_name, email, password, role 
-             FROM users 
-             WHERE email = ? LIMIT 1"
+            // "SELECT id, full_name, email, password, role 
+            //  FROM users 
+            //  WHERE email = ? LIMIT 1"
+            "SELECT id, full_name, email, password, role, is_verified 
+ FROM users 
+ WHERE email = ? LIMIT 1"
         );
 
         if (!$stmt) {
@@ -50,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $result->fetch_assoc();
 
             if (password_verify($password, $user['password'])) {
+                
 
                 // SESSION SET
                 $_SESSION['user_id']    = $user['id'];
@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // REDIRECT
                 if ($user['role'] === 'admin') {
-                    header("Location: /Inventrix/admin/admin_dashboard.php");
+                    header("Location: admin_dashboard.php");
                 } else {
-                    header("Location: /Inventrix/users/user_dashboard.php");
+                    header("Location: ../users/user_dashboard.php");
                 }
                 exit();
 

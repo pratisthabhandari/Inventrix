@@ -46,13 +46,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
             
+            // if ($stmt->execute()) {
+            //     $success = "Account created successfully! You can now login.";
+            //     // Clear form values after successful registration
+            //     $name = $email = $role = '';
+            // } else {
+            //     $error = "Error creating account: " . $stmt->error;
+            // }
             if ($stmt->execute()) {
-                $success = "Account created successfully! You can now login.";
-                // Clear form values after successful registration
-                $name = $email = $role = '';
-            } else {
-                $error = "Error creating account: " . $stmt->error;
-            }
+    // Generate 6-digit OTP
+    $otp = rand(100000, 999999);
+
+    // Store OTP in DB
+    $otpStmt = $conn->prepare("UPDATE users SET otp=? WHERE email=?");
+    $otpStmt->bind_param("ss", $otp, $email);
+    $otpStmt->execute();
+    $otpStmt->close();
+
+    // Send OTP
+    require_once "send_otp.php";
+    sendOTP($email, $otp);
+
+    // Redirect to OTP verification page
+    $_SESSION['verify_email'] = $email;
+    header("Location: verify_otp.php");
+    exit();
+} 
         }
         $stmt->close();
     }

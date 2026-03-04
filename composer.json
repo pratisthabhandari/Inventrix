@@ -1,0 +1,17 @@
+{
+    "name": "pratistha/inventrix",
+    "autoload": {
+        "psr-4": {
+            "Pratistha\\Inventrix\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "pratisthabhandari",
+            "email": "temppratistha1@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
