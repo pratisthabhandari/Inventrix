@@ -86,7 +86,9 @@ $pageTitle = "Products Report";
 
         <div class="export-options">
             <button class="export-btn pdf">Export as PDF</button>
-            <button class="export-btn excel">Export as Excel</button>
+            <button class="export-btn excel" onclick="window.location='export_products.php'">
+    Export as Excel
+</button>
         </div>
     </div>
 
