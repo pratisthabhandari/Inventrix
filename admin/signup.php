@@ -46,13 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
             
-            // if ($stmt->execute()) {
-            //     $success = "Account created successfully! You can now login.";
-            //     // Clear form values after successful registration
-            //     $name = $email = $role = '';
-            // } else {
-            //     $error = "Error creating account: " . $stmt->error;
-            // }
             if ($stmt->execute()) {
     // Generate 6-digit OTP
     $otp = rand(100000, 999999);

@@ -2,9 +2,10 @@
 require '../vendor/autoload.php';
 require_once 'db.php';
 
-// PhpSpreadsheet classes
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Settings;
 
 // DB connection
 $db = new Database();
@@ -14,14 +15,13 @@ $conn = $db->getConnection();
 $query = "SELECT product_name, unit_price, stock, supplier, created_at FROM products ORDER BY id DESC";
 $result = mysqli_query($conn, $query);
 
-// Create sheet
+// Create spreadsheet
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 // Header row
 $headers = ["Date", "Supplier", "Product", "Quantity", "Unit Price", "Total Price", "Alert"];
 $col = 'A';
-
 foreach ($headers as $header) {
     $sheet->setCellValue($col . '1', $header);
     $sheet->getStyle($col . '1')->getFont()->setBold(true);
@@ -32,7 +32,6 @@ $row = 2;
 
 // Fill data
 while ($data = mysqli_fetch_assoc($result)) {
-
     $total = $data['stock'] * $data['unit_price'];
     $alert = ($data['stock'] <= 5) ? "Low" : "High";
 
@@ -44,6 +43,11 @@ while ($data = mysqli_fetch_assoc($result)) {
     $sheet->setCellValue("F$row", $total);
     $sheet->setCellValue("G$row", $alert);
 
+    // Highlight low stock rows
+    if ($data['stock'] <= 5) {
+        $sheet->getStyle("A$row:G$row")->getFont()->getColor()->setRGB('FF0000'); // red font
+    }
+
     $row++;
 }
 
@@ -52,12 +56,25 @@ foreach (range('A', 'G') as $columnID) {
     $sheet->getColumnDimension($columnID)->setAutoSize(true);
 }
 
-// Output file to user
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="Products_Report.xlsx"');
-header('Cache-Control: max-age=0');
 
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
-exit;
+// Check export type
+$exportType = isset($_GET['type']) ? $_GET['type'] : 'excel';
+
+if ($exportType === 'pdf') {
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="Products_Report.pdf"');
+    header('Cache-Control: max-age=0');
+
+    $writer = new Mpdf($spreadsheet);
+    $writer->save('php://output');
+    exit;
+} else {
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="Products_Report.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
+}
 ?>
