@@ -411,8 +411,8 @@ body, .main-content { font-family: var(--font) !important; }
     <div class="dashboard-hero">
         <div class="hero-top">
             <div class="hero-greeting">
-                <span class="hero-eyebrow">Dashboard Overview</span>
-                <h1 class="hero-name">Welcome back,<br><?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?> </h1>
+              
+                <h1 class="hero-name">Welcome!<br><?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?> </h1>
                 <p class="hero-sub">Here's what's happening with your inventory today.</p>
             </div>
             <div class="hero-date-badge" id="liveClock"></div>

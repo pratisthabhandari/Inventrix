@@ -113,7 +113,7 @@ body, input, button, label { font-family: var(--font) !important; }
     font-size: 1.1rem;
     font-weight: 800;
     color: #fff;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.1rem;
 }
 .form-card-header p {
     font-size: 0.76rem;

@@ -36,7 +36,7 @@ body, .main-content, table, input, button { font-family: var(--font) !important;
 .main-content {
     background: var(--gray-40);
     min-height: 100vh;
-    padding: 2rem 2.5rem 6rem 2.5rem;
+    padding: 0.5rem 2.5rem 6rem 2.5rem;
     margin-left: 0 !important;
 }
 
@@ -45,7 +45,7 @@ body, .main-content, table, input, button { font-family: var(--font) !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .page-header-left h2 {
     font-size: 1.75rem;
@@ -533,7 +533,7 @@ tbody td:last-child  { text-align: center; }
     <div class="page-header">
         <div class="page-header-left">
             <h2>Available Products</h2>
-            <p>Select items, set quantities, then checkout to generate a bill</p>
+          
         </div>
        
     </div>
