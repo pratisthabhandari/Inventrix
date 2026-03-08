@@ -1,48 +1,375 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="./css/sidebar.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<!-- DO NOT link sidebar.css here — all styles are self-contained below -->
+
+<style>
+/* ════════════════════════════════════════════
+   LAYOUT — shift page content right of sidebar
+   These use !important to win over ANY page CSS
+   ════════════════════════════════════════════ */
+html { margin: 0 !important; padding: 0 !important; }
+
+body {
+    margin:          0          !important;
+    padding-top:     0          !important;
+    padding-right:   0          !important;
+    padding-bottom:  0          !important;
+    padding-left:    240px      !important;   /* sidebar(220px) + 20px gap */
+    box-sizing:      border-box !important;
+    min-height:      100vh;
+}
+
+.main-content {
+    margin-left:  0    !important;
+    padding-left: 0    !important;
+    width:        100% !important;
+    box-sizing:   border-box;
+}
+
+/* ════════════════════════════════════════════
+   SIDEBAR SHELL
+   ════════════════════════════════════════════ */
+.sidebar {
+    position:   fixed !important;
+    top:        0     !important;
+    left:       0     !important;
+    width:      220px !important;
+    height:     100vh !important;
+    background: linear-gradient(180deg, #0c1e3d 0%, #1a3460 60%, #112240 100%) !important;
+    display:    flex          !important;
+    flex-direction: column    !important;
+    padding:    0             !important;
+    margin:     0             !important;
+    z-index:    9999          !important;
+    overflow:   hidden        !important;
+    box-shadow: 4px 0 24px rgba(12,30,61,0.4) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    box-sizing: border-box    !important;
+}
+
+/* decorative glow circles */
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(59,130,246,0.08);
+    pointer-events: none;
+}
+.sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 60px; left: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(59,130,246,0.06);
+    pointer-events: none;
+}
+
+/* ════════════════════════════════════════════
+   LOGO
+   ════════════════════════════════════════════ */
+.sidebar .logo {
+    padding: 1.5rem 1.2rem 1.2rem !important;
+    border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+    position: relative;
+    z-index: 1;
+    margin: 0 !important;
+}
+
+.logo-inner {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+}
+
+.logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.45);
+    flex-shrink: 0;
+}
+
+.sidebar .logo h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size:   1.2rem  !important;
+    font-weight: 700     !important;
+    color:       #fff    !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1       !important;
+    margin:      0       !important;
+}
+
+.logo-sub {
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* ════════════════════════════════════════════
+   NAV SECTION LABEL
+   ════════════════════════════════════════════ */
+.nav-section-label {
+    font-size:  0.58rem !important;
+    font-weight: 700    !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: rgba(255,255,255,0.25) !important;
+    padding: 1.1rem 1.2rem 0.35rem !important;
+}
+
+/* ════════════════════════════════════════════
+   NAV MENU + ITEMS
+   ════════════════════════════════════════════ */
+.sidebar .nav-menu {
+    flex: 1 !important;
+    padding: 0.4rem 0.7rem !important;
+    display: flex         !important;
+    flex-direction: column !important;
+    gap: 2px              !important;
+    overflow-y: auto      !important;
+    position: relative;
+    z-index: 1;
+}
+.sidebar .nav-menu::-webkit-scrollbar { width: 0; }
+
+.sidebar .nav-item a {
+    display:         flex          !important;
+    align-items:     center        !important;
+    gap:             0.65rem       !important;
+    padding:         0.65rem 0.8rem !important;
+    border-radius:   10px          !important;
+    color:           rgba(255,255,255,0.55) !important;
+    text-decoration: none          !important;
+    font-size:       0.84rem       !important;
+    font-weight:     500           !important;
+    transition:      all 0.18s ease;
+    position:        relative;
+    overflow:        hidden;
+    background:      transparent   !important;
+    box-shadow:      none          !important;
+    margin:          0             !important;
+}
+
+.sidebar .nav-item a:hover {
+    color:      #fff !important;
+    background: rgba(255,255,255,0.08) !important;
+}
+
+/* icon bubble */
+.sidebar .nav-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    transition: all 0.18s;
+    color: rgba(255,255,255,0.5) !important;
+}
+
+.sidebar .nav-item a:hover .nav-icon {
+    background: rgba(59,130,246,0.25) !important;
+    color: #93c5fd !important;
+}
+
+.nav-label { flex: 1; }
+
+/* active */
+.sidebar .nav-item.active a {
+    color:      #fff !important;
+    background: linear-gradient(135deg, rgba(37,99,235,0.55), rgba(59,130,246,0.35)) !important;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.25) !important;
+}
+.sidebar .nav-item.active .nav-icon {
+    background: #2563eb !important;
+    color:      #fff    !important;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.5) !important;
+}
+.sidebar .nav-item.active a::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 60%;
+    background: #3b82f6;
+    border-radius: 3px 0 0 3px;
+}
+
+/* ════════════════════════════════════════════
+   LOGOUT
+   ════════════════════════════════════════════ */
+.sidebar .nav-item.logout {
+    margin-top:    0 !important;
+    margin-bottom: 0 !important;
+}
+.sidebar .nav-item.logout a {
+    color:      rgba(255,120,120,0.75) !important;
+    background: transparent            !important;
+    box-shadow: none                   !important;
+}
+.sidebar .nav-item.logout .nav-icon {
+    color:      rgba(255,100,100,0.55) !important;
+    background: rgba(255,80,80,0.08)   !important;
+}
+.sidebar .nav-item.logout a:hover {
+    background: rgba(255,80,80,0.12) !important;
+    color:      #ff8080              !important;
+}
+.sidebar .nav-item.logout a:hover .nav-icon {
+    background: rgba(255,80,80,0.2) !important;
+    color:      #ff8080             !important;
+}
+
+/* ════════════════════════════════════════════
+   FOOTER USER STRIP
+   ════════════════════════════════════════════ */
+.sidebar-footer {
+    padding:      0.9rem 1.2rem !important;
+    border-top:   1px solid rgba(255,255,255,0.07) !important;
+    position:     relative;
+    z-index:      1;
+    flex-shrink:  0;
+}
+
+.sidebar-footer-inner {
+    display:      flex !important;
+    align-items:  center !important;
+    gap:          0.6rem !important;
+    padding:      0.55rem 0.7rem !important;
+    border-radius: 10px !important;
+    background:   rgba(255,255,255,0.04) !important;
+    border:       1px solid rgba(255,255,255,0.07) !important;
+}
+
+.footer-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.footer-info { flex: 1; min-width: 0; }
+
+.footer-name {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.footer-role {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.footer-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74,222,128,0.6);
+    flex-shrink: 0;
+}
+</style>
 
 <div class="sidebar">
+
     <div class="logo">
-        <h1>INVENTRIX</h1>
+        <div class="logo-inner">
+          
+            <div>
+                <h1>INVENTRIX</h1>
+                <div class="logo-sub">Inventory System</div>
+            </div>
+        </div>
     </div>
+
+    <div class="nav-section-label">Main Menu</div>
 
     <div class="nav-menu">
         <div class="nav-item">
             <a href="user_dashboard.php">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <div class="nav-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <span class="nav-label">Dashboard</span>
             </a>
         </div>
 
         <div class="nav-item">
             <a href="products.php">
-                <i class="fas fa-box-open"></i> Products
+                <div class="nav-icon"><i class="fas fa-box-open"></i></div>
+                <span class="nav-label">Products</span>
             </a>
         </div>
 
         <div class="nav-item">
             <a href="profilePage.php">
-                <i class="fas fa-user"></i> Profile
+                <div class="nav-icon"><i class="fas fa-user"></i></div>
+                <span class="nav-label">Profile</span>
             </a>
         </div>
 
+        <div style="flex:1;min-height:0.5rem"></div>
+
         <div class="nav-item logout">
             <a href="../admin/logout.php">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <div class="nav-icon"><i class="fas fa-sign-out-alt"></i></div>
+                <span class="nav-label">Logout</span>
             </a>
         </div>
     </div>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-footer-inner">
+            <div class="footer-avatar" id="sidebarAvatar">U</div>
+            <div class="footer-info">
+                <div class="footer-name" id="sidebarName">User</div>
+                <div class="footer-role">Member</div>
+            </div>
+            <div class="footer-dot" title="Online"></div>
+        </div>
+    </div>
+
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname.split("/").pop();
-    const navLinks = document.querySelectorAll(".nav-item a");
-
-    navLinks.forEach(link => {
+    document.querySelectorAll(".nav-item a").forEach(link => {
         const linkPage = link.getAttribute("href").split("/").pop();
         if (linkPage === currentPage) {
             link.parentElement.classList.add("active");
         }
     });
+
+    const userName = document.querySelector('meta[name="user-name"]')?.content || null;
+    if (userName) {
+        const nameEl   = document.getElementById('sidebarName');
+        const avatarEl = document.getElementById('sidebarAvatar');
+        if (nameEl)   nameEl.textContent   = userName;
+        if (avatarEl) avatarEl.textContent = userName.charAt(0).toUpperCase();
+    }
 });
 </script>
