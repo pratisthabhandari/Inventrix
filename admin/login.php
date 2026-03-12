@@ -51,318 +51,295 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INVENTRIX — Sign In</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --blue-900: #0c1e3d;
-            --blue-800: #1a3460;
-            --blue-600: #1d4ed8;
-            --blue-500: #2563eb;
-            --blue-400: #3b82f6;
-            --blue-200: #bfdbfe;
-            --blue-100: #dbeafe;
-            --blue-50:  #eff6ff;
-            --white:    #ffffff;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-400: #94a3b8;
-            --gray-600: #475569;
-            --gray-800: #1e293b;
+            --bg:        #e8f4fb;
+            --bg2:       #d4ecf7;
+            --blue:      #4bafd4;
+            --blue-dark: #2a8db5;
+            --blue-deep: #1a6e91;
+            --blue-pale: #cce8f5;
+            --blue-soft: #a8d8ec;
+            --white:     #ffffff;
+            --text:      #1c3a4a;
+            --muted:     #6b9ab0;
+            --border:    #c0dcea;
+            --input-bg:  #f4fafd;
+            --red:       #e05a5a;
+            --red-bg:    #fdf2f2;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Nunito', sans-serif;
             min-height: 100vh;
+            background: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-600) 100%);
-            position: relative;
-            overflow: hidden;
+            padding: 2rem 1rem;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.04);
-            filter: blur(80px);
-            top: -200px; left: -150px;
-            pointer-events: none;
-        }
+        /* subtle tinted bottom */
         body::after {
             content: '';
             position: fixed;
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            filter: blur(80px);
-            bottom: -150px; right: -100px;
+            bottom: 0; left: 0; right: 0;
+            height: 220px;
+            background: linear-gradient(to top, var(--bg2), transparent);
             pointer-events: none;
         }
 
-        /* Dot grid */
-        .bg-grid {
+        /* ── BACK LINK ── */
+        .back-link {
             position: fixed;
-            inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-        }
-
-        /* ── BACK BUTTON ── */
-        .back-btn {
-            position: fixed;
-            top: 1.5rem;
+            top: 1.4rem;
             left: 1.75rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
+            gap: 0.4rem;
             font-size: 0.82rem;
-            font-weight: 600;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s;
+            font-weight: 700;
+            color: var(--blue-dark);
+            text-decoration: none;
             z-index: 10;
+            transition: gap 0.18s, color 0.15s;
         }
-        .back-btn:hover {
-            color: var(--white);
-            background: rgba(255,255,255,0.18);
-            transform: translateX(-2px);
+        .back-link:hover { gap: 0.65rem; color: var(--blue-deep); }
+
+        /* ── WRAPPER ── */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 520px;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── BRAND ── */
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+        }
+
+        .brand-icon {
+            width: 40px; height: 40px;
+            background: var(--blue);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(75,175,212,0.3);
+        }
+
+        .brand-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
         }
 
         /* ── CARD ── */
         .card {
-            position: relative;
-            z-index: 1;
             background: var(--white);
-            border-radius: 20px;
-            border: 1px solid var(--gray-200);
-            box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 4px 16px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 420px;
-            overflow: hidden;
-            animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+            border-radius: 22px;
+            border: 1.5px solid var(--border);
+            box-shadow:
+                0 2px 0 var(--blue-pale),
+                0 8px 32px rgba(74,175,212,0.1),
+                0 2px 6px rgba(0,0,0,0.04);
+            padding: 3rem 3rem 2.5rem;
         }
 
-        @keyframes popIn {
-            from { opacity:0; transform: scale(0.94) translateY(16px); }
-            to   { opacity:1; transform: scale(1) translateY(0); }
-        }
-
-        /* Card header */
-        .card-header {
-            background: var(--blue-900);
-            padding: 2rem 2rem 1.75rem;
-            text-align: center;
-        }
-
-        .card-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 1.1rem;
-        }
-
-        .card-logo-icon {
-            width: 40px; height: 40px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .card-logo-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--white);
-            letter-spacing: 0.06em;
+        /* top stripe */
+        .card::before {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 4px;
+            background: var(--blue);
+            border-radius: 2px;
+            margin: 0 auto 2rem;
         }
 
         .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.3rem;
-        }
-
-        .card-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* Card body */
-        .card-body { padding: 1.75rem 2rem; }
-
-        /* Error */
-        .alert-error {
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            background: #fef2f2;
-            border: 1px solid #fca5a5;
-            color: #991b1b;
-            padding: 0.7rem 0.9rem;
-            border-radius: 9px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1.25rem;
-            animation: shake 0.35s ease;
-        }
-
-        @keyframes shake {
-            0%,100% { transform:translateX(0); }
-            25%      { transform:translateX(-5px); }
-            75%      { transform:translateX(5px); }
-        }
-
-        /* Fields */
-        .field { margin-bottom: 1.1rem; }
-
-        .field label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--gray-600);
+            color: var(--text);
+            text-align: center;
             margin-bottom: 0.4rem;
         }
 
-        .field-inner {
+        .card-sub {
+            font-size: 0.88rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 2.25rem;
+        }
+
+        /* ── ERROR ── */
+        .error-box {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: var(--red-bg);
+            border: 1px solid #f5bcbc;
+            color: var(--red);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── FIELDS ── */
+        .field { margin-bottom: 1.25rem; }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .input-wrap {
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .field-icon {
+        .input-wrap .fi {
             position: absolute;
-            left: 13px;
-            color: var(--gray-400);
-            font-size: 0.82rem;
+            left: 14px;
+            font-size: 0.85rem;
+            color: var(--blue-soft);
             pointer-events: none;
         }
 
-        .field input {
+        .input-wrap input {
             width: 100%;
-            padding: 0.72rem 1rem 0.72rem 2.55rem;
-            border: 1.5px solid var(--gray-200);
-            border-radius: 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.88rem;
-            color: var(--gray-800);
-            background: var(--gray-100);
+            padding: 0.9rem 2.6rem 0.9rem 2.6rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            background: var(--input-bg);
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.92rem;
+            color: var(--text);
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
         }
-        .field input:focus {
-            border-color: var(--blue-400);
-            background: var(--white);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-        }
-        .field input::placeholder { color: var(--gray-400); }
 
-        .toggle-pwd {
+        .input-wrap input::placeholder { color: #b0d0df; }
+
+        .input-wrap input:focus {
+            border-color: var(--blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(75,175,212,0.13);
+        }
+
+        .eye-btn {
             position: absolute;
-            right: 13px;
-            color: var(--gray-400);
+            right: 14px;
+            color: #b0d0df;
+            font-size: 0.85rem;
             cursor: pointer;
-            font-size: 0.82rem;
             transition: color 0.15s;
         }
-        .toggle-pwd:hover { color: var(--blue-500); }
+        .eye-btn:hover { color: var(--blue); }
 
-        /* Submit */
-        .submit-btn {
+        /* ── BUTTON ── */
+        .btn {
             width: 100%;
-            margin-top: 0.5rem;
-            padding: 0.82rem;
-            background: var(--blue-500);
+            margin-top: 1.75rem;
+            padding: 0.95rem;
+            background: var(--blue);
             color: var(--white);
             border: none;
-            border-radius: 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.96rem;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 16px rgba(37,99,235,0.3);
-            transition: all 0.2s;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 16px rgba(74,175,212,0.35);
+            transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
         }
-        .submit-btn:hover {
-            background: var(--blue-600);
+        .btn:hover {
+            background: var(--blue-dark);
             transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(37,99,235,0.4);
+            box-shadow: 0 8px 24px rgba(74,175,212,0.4);
         }
-        .submit-btn:active { transform: none; }
+        .btn:active { transform: none; }
 
-        /* Footer */
-        .card-footer {
+        /* ── FOOTER ── */
+        .foot {
             text-align: center;
-            padding: 1rem 2rem 1.5rem;
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            border-top: 1px solid var(--gray-100);
+            margin-top: 1.75rem;
+            padding-top: 1.5rem;
+            border-top: 1.5px solid var(--blue-pale);
+            font-size: 0.84rem;
+            color: var(--muted);
         }
-        .card-footer a {
-            color: var(--blue-500);
-            font-weight: 600;
+        .foot a {
+            color: var(--blue-dark);
+            font-weight: 700;
             text-decoration: none;
         }
-        .card-footer a:hover { color: var(--blue-600); }
+        .foot a:hover { color: var(--blue-deep); text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <div class="bg-grid"></div>
-
-    <a href="../index.php" class="back-btn">
+    <a href="../index.php" class="back-link">
         <i class="fa-solid fa-arrow-left"></i> Back to Home
     </a>
 
-    <div class="card">
+    <div class="wrapper">
 
-        <div class="card-header">
-            <div class="card-logo">
-              
-                <span class="card-logo-name">INVENTRIX</span>
-            </div>
-            <div class="card-title">Welcome!</div>
-            <div class="card-subtitle">Sign in to your account to continue</div>
+        <div class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <span class="brand-name">Inventrix</span>
         </div>
 
-        <div class="card-body">
+        <div class="card">
+
+            <div class="card-title">Welcome!</div>
+            <div class="card-sub">Sign in to your account to continue</div>
 
             <?php if (!empty($error)): ?>
-                <div class="alert-error">
+                <div class="error-box">
                     <i class="fa-solid fa-circle-exclamation"></i>
                     <?= htmlspecialchars($error) ?>
                 </div>
             <?php endif; ?>
 
             <form method="POST">
+
                 <div class="field">
                     <label for="email">Email Address</label>
-                    <div class="field-inner">
-                        <i class="fa-solid fa-envelope field-icon"></i>
-                        <input type="email" id="email" name="email"
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-envelope fi"></i>
+                        <input
+                            type="email" id="email" name="email"
                             placeholder="you@example.com"
                             value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
                             required>
@@ -371,23 +348,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="field">
                     <label for="password">Password</label>
-                    <div class="field-inner">
-                        <i class="fa-solid fa-lock field-icon"></i>
-                        <input type="password" id="password" name="password"
-                            placeholder="Enter your password" required>
-                        <i class="fa-solid fa-eye toggle-pwd" id="togglePwd"></i>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock fi"></i>
+                        <input
+                            type="password" id="password" name="password"
+                            placeholder="Enter your password"
+                            required>
+                        <i class="fa-solid fa-eye eye-btn" id="togglePwd"></i>
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn">
-                    Sign In <i class="fa-solid fa-arrow-right"></i>
+                <button type="submit" class="btn">
+                    Sign In &nbsp;<i class="fa-solid fa-arrow-right"></i>
                 </button>
+
             </form>
 
-        </div>
+            <div class="foot">
+                Don't have an account? <a href="signup.php">Create one</a>
+            </div>
 
-        <div class="card-footer">
-            Don't have an account? <a href="signup.php">Sign up</a>
         </div>
 
     </div>

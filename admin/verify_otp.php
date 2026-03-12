@@ -44,336 +44,318 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INVENTRIX — Verify Email</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --blue-900: #0c1e3d;
-            --blue-800: #1a3460;
-            --blue-600: #1d4ed8;
-            --blue-500: #2563eb;
-            --blue-400: #3b82f6;
-            --blue-200: #bfdbfe;
-            --blue-50:  #eff6ff;
-            --white:    #ffffff;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-400: #94a3b8;
-            --gray-600: #475569;
-            --gray-800: #1e293b;
+            --bg:        #e8f4fb;
+            --bg2:       #d4ecf7;
+            --blue:      #4bafd4;
+            --blue-dark: #2a8db5;
+            --blue-deep: #1a6e91;
+            --blue-pale: #cce8f5;
+            --blue-soft: #a8d8ec;
+            --white:     #ffffff;
+            --text:      #1c3a4a;
+            --muted:     #6b9ab0;
+            --border:    #c0dcea;
+            --input-bg:  #f4fafd;
+            --red:       #e05a5a;
+            --red-bg:    #fdf2f2;
+            --green:     #2da06b;
+            --green-bg:  #f0fdf6;
+            --green-border: #a7f3d0;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Nunito', sans-serif;
             min-height: 100vh;
+            background: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-600) 100%);
-            background-attachment: fixed;
-            position: relative;
-            overflow: hidden;
             padding: 2rem 1rem;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.04);
-            filter: blur(80px);
-            top: -200px; left: -150px;
-            pointer-events: none;
-        }
         body::after {
             content: '';
             position: fixed;
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            filter: blur(80px);
-            bottom: -150px; right: -100px;
+            bottom: 0; left: 0; right: 0;
+            height: 220px;
+            background: linear-gradient(to top, var(--bg2), transparent);
             pointer-events: none;
         }
 
-        .bg-grid {
+        /* ── BACK LINK ── */
+        .back-link {
             position: fixed;
-            inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-        }
-
-        /* ── BACK BUTTON ── */
-        .back-btn {
-            position: fixed;
-            top: 1.5rem; left: 1.75rem;
+            top: 1.4rem;
+            left: 1.75rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
+            gap: 0.4rem;
             font-size: 0.82rem;
-            font-weight: 600;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s;
+            font-weight: 700;
+            color: var(--blue-dark);
+            text-decoration: none;
             z-index: 10;
+            transition: gap 0.18s, color 0.15s;
         }
-        .back-btn:hover {
-            color: var(--white);
-            background: rgba(255,255,255,0.18);
-            transform: translateX(-2px);
+        .back-link:hover { gap: 0.65rem; color: var(--blue-deep); }
+
+        /* ── WRAPPER ── */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 520px;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── BRAND ── */
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+        }
+
+        .brand-icon {
+            width: 40px; height: 40px;
+            background: var(--blue);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(75,175,212,0.3);
+        }
+
+        .brand-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
         }
 
         /* ── CARD ── */
         .card {
-            position: relative;
-            z-index: 1;
             background: var(--white);
-            border-radius: 20px;
-            border: 1px solid var(--gray-200);
-            box-shadow: 0 24px 64px rgba(0,0,0,0.25), 0 4px 16px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 420px;
-            overflow: hidden;
-            animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+            border-radius: 22px;
+            border: 1.5px solid var(--border);
+            box-shadow:
+                0 2px 0 var(--blue-pale),
+                0 8px 32px rgba(74,175,212,0.1),
+                0 2px 6px rgba(0,0,0,0.04);
+            padding: 3rem 3rem 2.5rem;
         }
 
-        @keyframes popIn {
-            from { opacity:0; transform: scale(0.94) translateY(16px); }
-            to   { opacity:1; transform: scale(1) translateY(0); }
-        }
-
-        /* Card header */
-        .card-header {
-            background: var(--blue-900);
-            padding: 1.75rem 2rem;
-            text-align: center;
-        }
-
-        .card-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.9rem;
-        }
-
-        .card-logo-icon {
-            width: 38px; height: 38px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .card-logo-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--white);
-            letter-spacing: 0.06em;
+        .card::before {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 4px;
+            background: var(--blue);
+            border-radius: 2px;
+            margin: 0 auto 2rem;
         }
 
         .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.25rem;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 0.4rem;
         }
 
-        .card-subtitle {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.5);
+        .card-sub {
+            font-size: 0.88rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        /* Card body */
-        .card-body { padding: 1.75rem 2rem; }
-
-        /* Email badge */
+        /* ── EMAIL BADGE ── */
         .email-badge {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            background: var(--blue-50);
-            border: 1px solid var(--blue-200);
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.65rem;
+            background: var(--input-bg);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 0.85rem 1.1rem;
+            margin-bottom: 1.75rem;
         }
 
         .email-badge i {
-            color: var(--blue-500);
-            font-size: 0.85rem;
+            color: var(--blue);
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         .email-badge span {
-            font-size: 0.82rem;
-            color: var(--gray-600);
+            font-size: 0.84rem;
+            color: var(--muted);
         }
 
         .email-badge strong {
-            color: var(--blue-700, #1e40af);
+            color: var(--text);
             font-weight: 700;
         }
 
-        /* OTP inputs */
+        /* ── ALERT ── */
+        .alert {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .alert-error   { background: var(--red-bg);  border: 1px solid #f5bcbc; color: var(--red); }
+        .alert-success { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+
+        /* ── OTP BOXES ── */
         .otp-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--gray-600);
-            margin-bottom: 0.75rem;
             display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.85rem;
+            text-align: center;
         }
 
         .otp-boxes {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.65rem;
             justify-content: center;
             margin-bottom: 0.5rem;
         }
 
         .otp-box {
-            width: 52px; height: 56px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: 12px;
-            background: var(--gray-100);
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--blue-900);
+            width: 58px;
+            height: 64px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            background: var(--input-bg);
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
             text-align: center;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-            caret-color: var(--blue-500);
+            transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+            caret-color: var(--blue);
         }
 
         .otp-box:focus {
-            border-color: var(--blue-400);
+            border-color: var(--blue);
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+            box-shadow: 0 0 0 4px rgba(75,175,212,0.13);
         }
 
         .otp-box.filled {
-            border-color: var(--blue-400);
-            background: var(--blue-50);
+            border-color: var(--blue);
+            background: var(--white);
+            color: var(--blue-dark);
         }
 
-        /* Hidden real input (fallback) */
         #otpHidden { display: none; }
 
-        /* Alerts */
-        .alert {
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.7rem 0.9rem;
-            border-radius: 9px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1.25rem;
-        }
-        .alert-error   { background:#fef2f2; border:1px solid #fca5a5; color:#991b1b; animation: shake 0.35s ease; }
-        .alert-success { background:#f0fdf4; border:1px solid #86efac; color:#166534; }
-
-        @keyframes shake {
-            0%,100% { transform:translateX(0); }
-            25%      { transform:translateX(-5px); }
-            75%      { transform:translateX(5px); }
-        }
-
-        /* Submit */
-        .submit-btn {
+        /* ── SUBMIT BUTTON ── */
+        .btn {
             width: 100%;
-            margin-top: 1.25rem;
-            padding: 0.82rem;
-            background: var(--blue-500);
+            margin-top: 1.75rem;
+            padding: 0.95rem;
+            background: var(--blue);
             color: var(--white);
             border: none;
-            border-radius: 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.96rem;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 16px rgba(37,99,235,0.3);
-            transition: all 0.2s;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 16px rgba(74,175,212,0.35);
+            transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
         }
-        .submit-btn:hover {
-            background: var(--blue-600);
+        .btn:hover {
+            background: var(--blue-dark);
             transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(37,99,235,0.4);
+            box-shadow: 0 8px 24px rgba(74,175,212,0.4);
         }
-        .submit-btn:disabled {
-            background: var(--gray-400);
+        .btn:active { transform: none; }
+        .btn:disabled {
+            background: var(--blue-soft);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            opacity: 0.7;
         }
 
-        /* Success state */
+        /* ── SUCCESS STATE ── */
         .success-state {
             text-align: center;
-            padding: 1rem 0;
+            padding: 0.5rem 0 0.75rem;
         }
 
         .success-icon {
-            width: 64px; height: 64px;
+            width: 72px; height: 72px;
             border-radius: 50%;
-            background: #f0fdf4;
-            border: 2px solid #86efac;
+            background: var(--green-bg);
+            border: 2px solid var(--green-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: var(--green);
+            margin: 0 auto 1.25rem;
             animation: bounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
         }
 
         @keyframes bounceIn {
-            from { transform: scale(0); opacity:0; }
-            to   { transform: scale(1); opacity:1; }
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
         }
 
         .success-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            color: var(--blue-900);
+            color: var(--text);
             margin-bottom: 0.4rem;
         }
 
         .success-sub {
-            font-size: 0.82rem;
-            color: var(--gray-400);
+            font-size: 0.85rem;
+            color: var(--muted);
         }
 
         .redirect-bar {
-            height: 3px;
-            background: var(--gray-200);
+            height: 4px;
+            background: var(--blue-pale);
             border-radius: 999px;
-            margin-top: 1.5rem;
+            margin-top: 1.75rem;
             overflow: hidden;
         }
 
         .redirect-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+            background: var(--blue);
             border-radius: 999px;
             animation: fillBar 2.5s linear forwards;
         }
@@ -383,50 +365,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             to   { width: 100%; }
         }
 
-        /* Card footer */
-        .card-footer {
+        /* ── FOOTER ── */
+        .foot {
             text-align: center;
-            padding: 1rem 2rem 1.5rem;
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            border-top: 1px solid var(--gray-100);
+            margin-top: 1.75rem;
+            padding-top: 1.5rem;
+            border-top: 1.5px solid var(--blue-pale);
+            font-size: 0.84rem;
+            color: var(--muted);
         }
-        .card-footer a {
-            color: var(--blue-500);
-            font-weight: 600;
+        .foot a {
+            color: var(--blue-dark);
+            font-weight: 700;
             text-decoration: none;
         }
-        .card-footer a:hover { color: var(--blue-600); }
+        .foot a:hover { color: var(--blue-deep); text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <div class="bg-grid"></div>
+    <a href="login.php" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Login
+    </a>
 
-   
+    <div class="wrapper">
 
-    <div class="card">
-
-        <div class="card-header">
-            <div class="card-logo">
-              
-                <span class="card-logo-name">INVENTRIX</span>
-            </div>
-            <div class="card-title">Verify your email</div>
-            <div class="card-subtitle">Enter the 6-digit code we sent you</div>
+        <div class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <span class="brand-name">Inventrix</span>
         </div>
 
-        <div class="card-body">
+        <div class="card">
 
             <?php if (!empty($success)): ?>
+
                 <div class="success-state">
-                  
+                    <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
                     <div class="success-title">Email Verified!</div>
-                    <div class="success-sub">You can now login...</div>
+                    <div class="success-sub">You'll be redirected to login shortly…</div>
                     <div class="redirect-bar"><div class="redirect-fill"></div></div>
                 </div>
 
             <?php else: ?>
+
+                <div class="card-title">Verify your email</div>
+                <div class="card-sub">Enter the 6-digit code we sent you</div>
 
                 <div class="email-badge">
                     <i class="fa-solid fa-envelope"></i>
@@ -441,7 +424,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <form method="POST" id="otpForm">
-                    <label class="otp-label">Enter OTP</label>
+                    <label class="otp-label">Enter verification code</label>
                     <div class="otp-boxes">
                         <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="0">
                         <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="1">
@@ -452,41 +435,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <input type="hidden" name="otp" id="otpHidden">
 
-                    <button type="submit" class="submit-btn" id="verifyBtn" disabled>
-                        <i class="fa-solid fa-shield-check"></i> Verify OTP
+                    <button type="submit" class="btn" id="verifyBtn" disabled>
+                        <i class="fa-solid fa-shield-check"></i> Verify Email
                     </button>
                 </form>
+
+                <div class="foot">
+                    Didn't receive the code? <a href="signup.php">Resend</a>
+                </div>
 
             <?php endif; ?>
 
         </div>
 
-        <?php if (empty($success)): ?>
-        <div class="card-footer">
-            Didn't receive the code? <a href="signup.php">Resend</a>
-        </div>
-        <?php endif; ?>
-
     </div>
 
     <script>
-        const boxes   = document.querySelectorAll('.otp-box');
-        const hidden  = document.getElementById('otpHidden');
-        const btn     = document.getElementById('verifyBtn');
+        const boxes  = document.querySelectorAll('.otp-box');
+        const hidden = document.getElementById('otpHidden');
+        const btn    = document.getElementById('verifyBtn');
 
         function updateHidden() {
             const digits = [...boxes].map(b => b.value.trim());
             const val = digits.join('');
             hidden.value = val;
-            // style filled boxes
             boxes.forEach(b => b.classList.toggle('filled', b.value !== ''));
-            // enable button only when all 6 boxes have exactly 1 digit
             btn.disabled = digits.some(d => d === '') || val.length !== 6;
         }
 
         boxes.forEach((box, i) => {
             box.addEventListener('input', function () {
-                // only allow digits, take last char if somehow multiple
                 this.value = this.value.replace(/[^0-9]/g, '').slice(-1);
                 if (this.value && i < boxes.length - 1) boxes[i + 1].focus();
                 updateHidden();
@@ -500,7 +478,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
 
-            // allow pasting full OTP
             box.addEventListener('paste', function (e) {
                 e.preventDefault();
                 const text = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
@@ -510,7 +487,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         });
 
-        // Focus first box on load
         if (boxes[0]) boxes[0].focus();
     </script>
 
