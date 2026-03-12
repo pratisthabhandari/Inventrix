@@ -4,120 +4,210 @@ include 'sidebar.html';
 ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/product.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root {
-    --blue-900: #0c1e3d;
-    --blue-800: #1a3460;
-    --blue-700: #1e4080;
-    --blue-600: #1d4ed8;
-    --blue-500: #2563eb;
-    --blue-400: #3b82f6;
-    --blue-100: #dbeafe;
-    --blue-50:  #eff6ff;
-    --white:    #ffffff;
-    --gray-50:  #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-400: #94a3b8;
-    --gray-600: #475569;
-    --gray-800: #1e293b;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 16px rgba(30,78,180,0.12);
-    --shadow-lg: 0 8px 40px rgba(30,78,180,0.18);
-    --radius: 12px;
-    --font: 'Plus Jakarta Sans', sans-serif;
+    --bg:         #ffffff;
+    --blue:       #4bafd4;
+    --blue-dark:  #2a8db5;
+    --blue-deep:  #1a6e91;
+    --blue-pale:  #d0e9f5;
+    --blue-faint: #eaf5fb;
+    --blue-soft:  #a8d8ec;
+    --white:      #ffffff;
+    --text:       #0d2a38;
+    --text-sec:   #2a5570;
+    --muted:      #5589a3;
+    --border:     #bcd9e8;
+    --green:      #1a8f5e;
+    --green-bg:   #edfaf4;
+    --red:        #dc2626;
+    --red-bg:     #fef2f2;
+    --font:       'Nunito', sans-serif;
 }
-* { box-sizing: border-box; }
-body, .main-content, table, input, button { font-family: var(--font) !important; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    font-family: var(--font) !important;
+    background: var(--bg) !important;
+}
 
 .main-content {
-    background: var(--gray-40);
+    font-family: var(--font) !important;
+    background: var(--bg);
     min-height: 100vh;
-    padding: 0.5rem 2.5rem 6rem 2.5rem;
-    margin-left: 0 !important;
+    margin-left: 255px;
+    padding: 2rem 2.5rem 7rem;
 }
 
-/* ── Page header ── */
-.page-header {
+/* ── HEADER CARD (matches welcome-banner style) ── */
+.header-card {
+    background: var(--white);
+    border-radius: 18px;
+    border: 1.5px solid var(--blue-pale);
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
-}
-.page-header-left h2 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--blue-900);
-    letter-spacing: -0.03em;
-}
-.page-header-left p {
-    font-size: 0.82rem;
-    color: var(--gray-400);
-    margin-top: 3px;
-}
-.header-badge {
-    background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.35rem 1rem;
-    border-radius: 999px;
-    box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+    gap: 1.5rem;
+    box-shadow: 0 2px 12px rgba(42,141,181,0.07);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ── Search ── */
-.search-wrap {
-    margin-bottom: 1.25rem;
+/* same decorative circle as welcome-banner */
+.header-card::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--blue-faint);
+    border: 30px solid var(--blue-pale);
+    pointer-events: none;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     position: relative;
-    max-width: 380px;
+    z-index: 1;
+}
+
+.header-icon {
+    width: 48px; height: 48px;
+    background: var(--blue-faint);
+    border: 2px solid var(--blue-pale);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--blue);
+    flex-shrink: 0;
+}
+
+.header-texts { display: flex; flex-direction: column; gap: 2px; }
+
+.header-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+}
+
+.header-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.header-sub {
+    font-size: 0.84rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 0.1rem;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.65rem;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* product count chip — mirrors welcome-icon style */
+.header-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--blue-faint);
+    border: 1.5px solid var(--blue-pale);
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+}
+.chip-val {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+}
+.chip-lbl {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+/* Search — mirrors clock-pill row */
+.search-wrap {
+    position: relative;
+    width: 260px;
 }
 .search-icon {
     position: absolute;
     left: 13px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--gray-400);
+    color: var(--blue);
     pointer-events: none;
+    font-size: 0.72rem;
 }
 .search-box {
     width: 100%;
-    padding: 0.65rem 1rem 0.65rem 2.6rem;
-    border: 1.5px solid var(--gray-200);
+    padding: 0.4rem 1rem 0.4rem 2.3rem;
+    border: 1.5px solid var(--blue-pale);
     border-radius: 999px;
-    background: var(--white);
+    background: var(--blue-faint);
     font-family: var(--font);
-    font-size: 0.85rem;
-    color: var(--gray-800);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-sec);
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    box-shadow: var(--shadow-sm);
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
 }
-.search-box:focus { border-color: var(--blue-400); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-.search-box::placeholder { color: var(--gray-400); }
+.search-box:focus {
+    border-color: var(--blue);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(75,175,212,0.13);
+}
+.search-box::placeholder { color: #aac8d8; font-weight: 600; }
 
-/* ── Table ── */
+/* ── TABLE CONTAINER ── */
 .table-container {
     background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
+    border-radius: 18px;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 2px 0 var(--blue-pale), 0 4px 20px rgba(42,141,181,0.08);
     overflow: hidden;
-    border: 1px solid var(--gray-200);
 }
+
 table { width: 100%; border-collapse: collapse; }
 
-thead { background: linear-gradient(135deg, var(--blue-900), var(--blue-600)); }
+thead {
+    background: var(--blue-faint);
+    border-bottom: 2px solid var(--blue-pale);
+}
 thead th {
-    padding: 1rem 1.1rem;
-    font-size: 0.7rem;
-    font-weight: 700;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.68rem;
+    font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
+    color: var(--text-sec);
     text-align: left;
     white-space: nowrap;
 }
@@ -125,43 +215,47 @@ thead th:first-child { width: 48px; text-align: center; }
 thead th:last-child  { text-align: center; }
 
 tbody tr {
-    border-bottom: 1px solid var(--gray-100);
-    transition: background 0.14s;
+    border-bottom: 1px solid var(--blue-faint);
+    transition: background 0.13s;
     cursor: pointer;
 }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--blue-50); }
-tbody tr.is-selected { background: #eff6ff; border-left: 3px solid var(--blue-400); }
+tbody tr:hover { background: var(--blue-faint); }
+tbody tr.is-selected {
+    background: #e4f3fa;
+    border-left: 3px solid var(--blue);
+}
 
 tbody td {
-    padding: 0.85rem 1.1rem;
+    padding: 0.9rem 1.1rem;
     font-size: 0.85rem;
-    color: var(--gray-800);
+    color: var(--text);
     vertical-align: middle;
 }
 tbody td:first-child { text-align: center; }
 tbody td:last-child  { text-align: center; }
 
-.product-name-cell { font-weight: 600; color: var(--blue-900); }
+.product-name-cell { font-weight: 700; color: var(--text); }
 
 .cat-pill {
     display: inline-block;
     font-size: 0.68rem;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.2rem 0.65rem;
     border-radius: 999px;
-    background: var(--blue-100);
-    color: var(--blue-700);
+    background: var(--blue-faint);
+    color: var(--blue-deep);
+    border: 1px solid var(--blue-pale);
 }
 
-.stock-ok  { color: #16a34a; font-weight: 600; }
-.stock-low { color: #dc2626; font-weight: 600; }
+.stock-ok  { color: var(--green); font-weight: 700; }
+.stock-low { color: var(--red);   font-weight: 700; }
 
-/* Checkbox */
+/* ── CHECKBOX ── */
 .cb {
     appearance: none;
     width: 17px; height: 17px;
-    border: 2px solid var(--gray-200);
+    border: 2px solid var(--border);
     border-radius: 5px;
     cursor: pointer;
     background: var(--white);
@@ -169,7 +263,7 @@ tbody td:last-child  { text-align: center; }
     transition: all 0.15s;
     vertical-align: middle;
 }
-.cb:checked { background: var(--blue-500); border-color: var(--blue-500); }
+.cb:checked { background: var(--blue); border-color: var(--blue); }
 .cb:checked::after {
     content: '';
     position: absolute;
@@ -180,80 +274,111 @@ tbody td:last-child  { text-align: center; }
     transform: rotate(45deg);
 }
 
-/* Qty input */
+/* ── QTY INPUT ── */
 .qty-input {
     width: 72px;
     padding: 0.38rem 0.5rem;
-    border: 1.5px solid var(--gray-200);
-    border-radius: 7px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
     font-family: var(--font);
     font-size: 0.84rem;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
-    color: var(--blue-800);
+    color: var(--text);
     background: var(--white);
     outline: none;
-    transition: border-color 0.18s, box-shadow 0.18s;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
-.qty-input:focus { border-color: var(--blue-400); box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
-.qty-input:disabled { opacity: 0.3; cursor: not-allowed; background: var(--gray-100); }
+.qty-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(75,175,212,0.13);
+}
+.qty-input:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: var(--blue-faint);
+}
 
-/* ── Cart bar ── */
+/* ── CART BAR ── */
 .cart-bar {
     display: none;
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
-    color: #fff;
+    background: var(--white);
+    border-top: 2px solid var(--blue-pale);
     padding: 1rem 2.5rem;
     align-items: center;
     gap: 2.5rem;
     z-index: 200;
-    box-shadow: 0 -4px 30px rgba(30,64,175,0.4);
+    box-shadow: 0 -4px 24px rgba(42,141,181,0.12);
 }
-.cart-bar.visible { display: flex; animation: slideUp 0.25s ease; }
-@keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:none; opacity:1; } }
+.cart-bar.visible { display: flex; animation: slideUp 0.22s ease; }
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+}
 
 .cart-bar-stat { display: flex; flex-direction: column; gap: 2px; }
-.cart-bar-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
-.cart-bar-value { font-size: 1rem; font-weight: 700; }
+.cart-bar-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 700;
+}
+.cart-bar-value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+}
 
 .cart-bar-actions { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
 
 .btn-clear {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: #fff;
-    padding: 0.55rem 1.1rem;
-    border-radius: 8px;
+    background: var(--blue-faint);
+    border: 1.5px solid var(--border);
+    color: var(--text-sec);
+    padding: 0.55rem 1.2rem;
+    border-radius: 10px;
     font-family: var(--font);
     font-size: 0.84rem;
-    cursor: pointer;
-    transition: background 0.15s;
-}
-.btn-clear:hover { background: rgba(255,255,255,0.2); }
-
-.btn-checkout {
-    background: #fff;
-    color: var(--blue-700);
-    border: none;
-    padding: 0.62rem 1.5rem;
-    border-radius: 8px;
-    font-family: var(--font);
-    font-size: 0.88rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.18s;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
-.btn-checkout:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,0.2); }
+.btn-clear:hover { background: var(--blue-pale); }
 
-/* ── Modals ── */
+.btn-checkout {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 0.62rem 1.5rem;
+    border-radius: 10px;
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.18s;
+    box-shadow: 0 3px 12px rgba(75,175,212,0.35);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+.btn-checkout:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(42,141,181,0.4);
+}
+
+/* ── MODALS ── */
 .modal-overlay {
     display: none;
     position: fixed; inset: 0;
-    background: rgba(12,30,61,0.6);
-    backdrop-filter: blur(5px);
+    background: rgba(13,42,56,0.45);
+    backdrop-filter: blur(4px);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -262,44 +387,46 @@ tbody td:last-child  { text-align: center; }
 
 .modal-box {
     background: var(--white);
-    border-radius: 16px;
+    border-radius: 20px;
     width: 92%;
     max-width: 580px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 60px rgba(42,141,181,0.2);
     animation: modalIn 0.22s ease;
     position: relative;
+    border: 1.5px solid var(--border);
 }
 @keyframes modalIn {
-    from { transform: translateY(18px) scale(0.97); opacity: 0; }
+    from { transform: translateY(16px) scale(0.97); opacity: 0; }
     to   { transform: none; opacity: 1; }
 }
 
 .modal-header {
-    background: linear-gradient(135deg, var(--blue-900), var(--blue-600));
+    background: var(--blue-faint);
     padding: 1.4rem 1.75rem;
-    border-radius: 16px 16px 0 0;
+    border-radius: 18px 18px 0 0;
+    border-bottom: 1.5px solid var(--blue-pale);
 }
-.modal-header h3 { font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-.modal-header p  { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+.modal-header h3 { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+.modal-header p  { font-size: 0.76rem; color: var(--muted); margin-top: 3px; font-weight: 500; }
 
 .close-btn {
     position: absolute;
     top: 1rem; right: 1.4rem;
-    font-size: 1.5rem;
-    color: rgba(255,255,255,0.65);
+    font-size: 1.3rem;
+    color: var(--muted);
     cursor: pointer;
     line-height: 1;
     transition: color 0.15s;
     z-index: 1;
 }
-.close-btn:hover { color: #fff; }
+.close-btn:hover { color: var(--text); }
 
 .modal-body   { padding: 1.5rem 1.75rem; }
 .modal-footer {
     padding: 1rem 1.75rem;
-    border-top: 1px solid var(--gray-100);
+    border-top: 1.5px solid var(--blue-faint);
     display: flex;
     justify-content: flex-end;
     gap: 0.65rem;
@@ -308,61 +435,72 @@ tbody td:last-child  { text-align: center; }
 .confirm-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
 .confirm-table th {
     text-align: left;
-    padding: 0.5rem 0.7rem;
-    background: var(--gray-50);
-    color: var(--gray-600);
+    padding: 0.55rem 0.75rem;
+    background: var(--blue-faint);
+    color: var(--text-sec);
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    border-bottom: 2px solid var(--gray-200);
-}
-.confirm-table td { padding: 0.62rem 0.7rem; border-bottom: 1px solid var(--gray-100); color: var(--gray-800); }
-.confirm-table tfoot td {
     font-weight: 700;
-    color: var(--blue-800);
-    font-size: 0.94rem;
-    border-top: 2px solid var(--gray-200);
+    border-bottom: 2px solid var(--blue-pale);
+}
+.confirm-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--blue-faint);
+    color: var(--text);
+}
+.confirm-table tfoot td {
+    font-weight: 800;
+    color: var(--blue-deep);
+    font-size: 0.92rem;
+    border-top: 2px solid var(--blue-pale);
     border-bottom: none;
     padding-top: 0.85rem;
+    background: var(--blue-faint);
 }
 
 .btn-primary {
-    background: var(--blue-500);
+    background: var(--blue);
     color: #fff;
     border: none;
-    padding: 0.6rem 1.3rem;
-    border-radius: 8px;
+    padding: 0.62rem 1.3rem;
+    border-radius: 10px;
     font-family: var(--font);
     font-size: 0.86rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.18s;
+    box-shadow: 0 3px 10px rgba(75,175,212,0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
-.btn-primary:hover { background: var(--blue-600); transform: translateY(-1px); }
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
 .btn-secondary {
-    background: var(--gray-100);
-    color: var(--gray-600);
-    border: 1px solid var(--gray-200);
-    padding: 0.6rem 1.1rem;
-    border-radius: 8px;
+    background: var(--blue-faint);
+    color: var(--text-sec);
+    border: 1.5px solid var(--border);
+    padding: 0.62rem 1.1rem;
+    border-radius: 10px;
     font-family: var(--font);
     font-size: 0.86rem;
+    font-weight: 700;
     cursor: pointer;
     transition: background 0.15s;
 }
-.btn-secondary:hover { background: var(--gray-200); }
+.btn-secondary:hover { background: var(--blue-pale); }
 
-/* ── Bill / Receipt ── */
+/* ── BILL ── */
 .bill-modal-box { max-width: 560px; }
 
 .bill-head {
-    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-600) 100%);
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 100%);
     padding: 2.2rem 2rem 1.75rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-radius: 16px 16px 0 0;
+    border-radius: 18px 18px 0 0;
 }
 .bill-head::before {
     content: '';
@@ -370,7 +508,8 @@ tbody td:last-child  { text-align: center; }
     top: -50px; right: -50px;
     width: 180px; height: 180px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.07);
+    pointer-events: none;
 }
 .bill-head::after {
     content: '';
@@ -379,50 +518,24 @@ tbody td:last-child  { text-align: center; }
     width: 140px; height: 140px;
     border-radius: 50%;
     background: rgba(255,255,255,0.05);
+    pointer-events: none;
 }
-.bill-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.65rem;
-    color: #fff;
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
-}
-.bill-tagline {
-    font-size: 0.68rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 3px;
-    position: relative;
-    z-index: 1;
-}
-.bill-badge {
-    display: inline-block;
-    margin-top: 1rem;
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.22);
-    color: #fff;
-    font-size: 0.67rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.9rem;
-    border-radius: 999px;
-    position: relative;
-    z-index: 1;
-}
+
+.bill-logo    { font-size: 1.5rem; font-weight: 800; color: #fff; position: relative; z-index: 1; letter-spacing: 0.06em; }
+.bill-tagline { font-size: 0.68rem; color: rgba(255,255,255,0.55); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 3px; position: relative; z-index: 1; }
+.bill-badge   { display: inline-block; margin-top: 1rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 0.67rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.9rem; border-radius: 999px; position: relative; z-index: 1; }
 
 .bill-meta {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 1.1rem 1.75rem;
-    background: var(--gray-50);
-    border-bottom: 1px dashed var(--gray-200);
+    background: var(--blue-faint);
+    border-bottom: 1px dashed var(--blue-pale);
     gap: 0.5rem 0;
 }
 .bill-meta-item.right { text-align: right; }
-.bill-meta-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); }
-.bill-meta-value { font-size: 0.83rem; font-weight: 600; color: var(--blue-900); margin-top: 2px; }
+.bill-meta-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+.bill-meta-value { font-size: 0.83rem; font-weight: 700; color: var(--text); margin-top: 2px; }
 
 .bill-items { padding: 1.25rem 1.75rem; }
 .bill-items-header {
@@ -432,10 +545,10 @@ tbody td:last-child  { text-align: center; }
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--gray-400);
+    color: var(--muted);
     font-weight: 700;
     padding-bottom: 0.6rem;
-    border-bottom: 2px solid var(--blue-100);
+    border-bottom: 2px solid var(--blue-pale);
     margin-bottom: 0.2rem;
 }
 .bill-item-row {
@@ -443,67 +556,57 @@ tbody td:last-child  { text-align: center; }
     grid-template-columns: 1fr 60px 95px 95px;
     gap: 0.5rem;
     padding: 0.65rem 0;
-    border-bottom: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--blue-faint);
     font-size: 0.84rem;
     align-items: center;
 }
 .bill-item-row:last-child { border-bottom: none; }
-.bill-item-name  { font-weight: 600; color: var(--blue-900); }
-.bill-item-qty   { color: var(--gray-600); text-align: center; }
-.bill-item-price { color: var(--gray-600); text-align: right; font-size: 0.8rem; }
-.bill-item-total { color: var(--blue-600); font-weight: 700; text-align: right; }
+.bill-item-name  { font-weight: 700; color: var(--text); }
+.bill-item-qty   { color: var(--muted); text-align: center; font-weight: 600; }
+.bill-item-price { color: var(--muted); text-align: right; font-size: 0.8rem; }
+.bill-item-total { color: var(--blue-dark); font-weight: 800; text-align: right; }
 
 .bill-summary {
     margin: 0 1.75rem;
-    border-top: 2px dashed var(--gray-200);
+    border-top: 2px dashed var(--blue-pale);
     padding: 0.9rem 0 0;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
-.bill-summary-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.82rem;
-    color: var(--gray-600);
-}
+.bill-summary-row { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
 
 .bill-grand {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, var(--blue-900), var(--blue-600));
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue));
     margin: 1.1rem 1.75rem;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 1rem 1.3rem;
     color: #fff;
-    box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    box-shadow: 0 4px 16px rgba(42,141,181,0.3);
 }
-.bill-grand-label  { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
-.bill-grand-amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
+.bill-grand-label  { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; font-weight: 700; }
+.bill-grand-amount { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
 
 .bill-footer {
     text-align: center;
     padding: 1rem 1.75rem 1.5rem;
-    border-top: 1px dashed var(--gray-200);
+    border-top: 1px dashed var(--blue-pale);
 }
-.bill-thanks { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--blue-600); margin-bottom: 4px; }
-.bill-footer p { font-size: 0.71rem; color: var(--gray-400); line-height: 1.65; }
+.bill-thanks { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 4px; }
+.bill-footer p { font-size: 0.71rem; color: var(--muted); line-height: 1.65; }
 
 .bill-actions {
     display: flex;
     gap: 0.75rem;
     justify-content: flex-end;
     padding: 1rem 1.75rem 1.4rem;
-    border-top: 1px solid var(--gray-100);
+    border-top: 1.5px solid var(--blue-faint);
 }
 
-/* ── Toast ── */
+/* ── TOAST ── */
 #toast-container {
     position: fixed;
     bottom: 5.5rem;
@@ -515,36 +618,50 @@ tbody td:last-child  { text-align: center; }
 }
 .toast {
     padding: 0.7rem 1.1rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-family: var(--font);
     font-size: 0.82rem;
-    font-weight: 500;
-    box-shadow: var(--shadow-md);
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(42,141,181,0.12);
     max-width: 300px;
     animation: toastIn 0.25s ease, toastOut 0.3s ease 3.7s forwards;
 }
-.toast-success { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
-.toast-error   { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+.toast-success { background: var(--green-bg); border: 1px solid #a7f3d0; color: var(--green); }
+.toast-error   { background: var(--red-bg);   border: 1px solid #fca5a5; color: var(--red); }
 @keyframes toastIn  { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
 @keyframes toastOut { from { opacity:1; } to { opacity:0; } }
 </style>
 
 <div class="main-content">
-    <div class="page-header">
-        <div class="page-header-left">
-            <h2>Available Products</h2>
-          
+
+    <!-- ── HEADER CARD ── -->
+    <div class="header-card">
+        <div class="header-left">
+            <div class="header-icon">
+                <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <div class="header-texts">
+                <span class="header-eyebrow">Inventory</span>
+                <div class="header-title">Available Products</div>
+                <div class="header-sub">Browse and checkout products from your inventory</div>
+            </div>
         </div>
-       
+        <div class="header-right">
+            <div class="header-chip">
+                <i class="fa-solid fa-box" style="color:var(--blue); font-size:0.75rem;"></i>
+                <span class="chip-val" id="totalCount">—</span>
+                <span class="chip-lbl">Products</span>
+            </div>
+            <div class="search-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-box" id="searchBox"
+                    placeholder="Search products…"
+                    oninput="filterTable()">
+            </div>
+        </div>
     </div>
 
-    <div class="search-wrap">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" class="search-box" id="searchBox" placeholder="Search products, categories, suppliers…" oninput="filterTable()">
-    </div>
-
+    <!-- ── TABLE ── -->
     <div class="table-container">
         <table>
             <thead>
@@ -563,6 +680,7 @@ tbody td:last-child  { text-align: center; }
         </table>
     </div>
 
+    <!-- ── CART BAR ── -->
     <div class="cart-bar" id="cartBar">
         <div class="cart-bar-stat">
             <span class="cart-bar-label">Products</span>
@@ -577,13 +695,18 @@ tbody td:last-child  { text-align: center; }
             <span class="cart-bar-value" id="cartTotal">NRs. 0.00</span>
         </div>
         <div class="cart-bar-actions">
-            <button class="btn-clear" onclick="clearSelection()">Clear</button>
-            <button class="btn-checkout" onclick="openConfirmModal()">Review &amp; Checkout →</button>
+            <button class="btn-clear" onclick="clearSelection()">
+                <i class="fa-solid fa-xmark"></i> Clear
+            </button>
+            <button class="btn-checkout" onclick="openConfirmModal()">
+                Review &amp; Checkout <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
     </div>
+
 </div>
 
-<!-- Confirm Modal -->
+<!-- ── CONFIRM MODAL ── -->
 <div class="modal-overlay" id="confirmModal">
     <div class="modal-box">
         <div class="modal-header">
@@ -608,19 +731,23 @@ tbody td:last-child  { text-align: center; }
         </div>
         <div class="modal-footer">
             <button class="btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
-            <button class="btn-primary" onclick="processBulkCheckout()">✓ Confirm Checkout</button>
+            <button class="btn-primary" onclick="processBulkCheckout()">
+                <i class="fa-solid fa-check"></i> Confirm Checkout
+            </button>
         </div>
     </div>
 </div>
 
-<!-- Bill Modal -->
+<!-- ── BILL MODAL ── -->
 <div class="modal-overlay" id="billModal">
     <div class="modal-box bill-modal-box">
-        <span class="close-btn" style="color:rgba(255,255,255,0.7);top:1rem;right:1.3rem" onclick="closeModal('billModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('billModal')">&times;</span>
         <div id="billContent"></div>
         <div class="bill-actions">
             <button class="btn-secondary" onclick="closeModal('billModal')">Close</button>
-            <button class="btn-primary" onclick="printBill()">🖨&nbsp; Print Bill</button>
+            <button class="btn-primary" onclick="printBill()">
+                <i class="fa-solid fa-print"></i> Print Bill
+            </button>
         </div>
     </div>
 </div>
@@ -634,13 +761,22 @@ let selectedIds = new Set();
 document.addEventListener('DOMContentLoaded', () => {
     fetch('../admin/fetch_product.php')
         .then(r => r.json())
-        .then(products => { allProducts = products; renderTable(products); });
+        .then(products => {
+            allProducts = products;
+            renderTable(products);
+            const el = document.getElementById('totalCount');
+            if (el) el.textContent = products.length;
+        })
+        .catch(() => {
+            const el = document.getElementById('totalCount');
+            if (el) el.textContent = '—';
+        });
 });
 
 function renderTable(products) {
     const tbody = document.getElementById('productTable');
     if (!products.length) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-400)">No products found</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2.5rem;color:var(--muted);font-weight:600">No products found</td></tr>`;
         return;
     }
     tbody.innerHTML = products.map(p => {
@@ -797,7 +933,6 @@ async function processBulkCheckout() {
 
     if (succeeded.length) {
         showToast(`✓ Checked out ${succeeded.length} product(s)`, 'success');
-        localStorage.setItem('dashboardRefresh', Date.now());
         clearSelection();
         renderBill(succeeded);
     }
@@ -826,7 +961,7 @@ function renderBill(results) {
 
     document.getElementById('billContent').innerHTML = `
     <div class="bill-head">
-        <div class="bill-logo">Inventory Manager</div>
+        <div class="bill-logo">INVENTRIX</div>
         <div class="bill-tagline">Sales Receipt</div>
         <div class="bill-badge">Official Bill</div>
     </div>
@@ -884,37 +1019,37 @@ function renderBill(results) {
 function printBill() {
     const content = document.getElementById('billContent').innerHTML;
     const win = window.open('', '_blank');
-    win.document.write(`<html><head><title>Bill</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    win.document.write(`<html><head><title>Bill — INVENTRIX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff}
-        .wrap{max-width:500px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
-        .bill-head{background:linear-gradient(135deg,#0c1e3d,#2563eb);padding:2rem;text-align:center;position:relative;overflow:hidden}
-        .bill-head::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.06)}
-        .bill-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700;position:relative;z-index:1}
-        .bill-tagline{font-size:.65rem;color:rgba(255,255,255,.5);letter-spacing:.2em;text-transform:uppercase;margin-top:3px;position:relative;z-index:1}
-        .bill-badge{display:inline-block;margin-top:.9rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .8rem;border-radius:999px;position:relative;z-index:1}
-        .bill-meta{display:grid;grid-template-columns:1fr 1fr;padding:1rem 1.5rem;background:#f8fafc;border-bottom:1px dashed #e2e8f0;gap:.4rem 0}
+        body{font-family:'Nunito',sans-serif;background:#fff}
+        .wrap{max-width:500px;margin:0 auto;border:1px solid #bcd9e8;border-radius:14px;overflow:hidden}
+        .bill-head{background:linear-gradient(135deg,#1a6e91,#4bafd4);padding:2rem;text-align:center;position:relative;overflow:hidden}
+        .bill-head::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.07)}
+        .bill-logo{font-size:1.4rem;font-weight:800;color:#fff;position:relative;z-index:1;letter-spacing:.06em}
+        .bill-tagline{font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.2em;text-transform:uppercase;margin-top:3px;position:relative;z-index:1}
+        .bill-badge{display:inline-block;margin-top:.9rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .8rem;border-radius:999px;position:relative;z-index:1}
+        .bill-meta{display:grid;grid-template-columns:1fr 1fr;padding:1rem 1.5rem;background:#eaf5fb;border-bottom:1px dashed #d0e9f5;gap:.4rem 0}
         .bill-meta-item{padding:.15rem 0}.right{text-align:right}
-        .bill-meta-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8}
-        .bill-meta-value{font-size:.81rem;font-weight:600;color:#0c1e3d;margin-top:1px}
+        .bill-meta-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:#5589a3;font-weight:700}
+        .bill-meta-value{font-size:.81rem;font-weight:700;color:#0d2a38;margin-top:1px}
         .bill-items{padding:1.1rem 1.5rem}
-        .bill-items-header{display:grid;grid-template-columns:1fr 55px 90px 90px;gap:.4rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;font-weight:700;padding-bottom:.5rem;border-bottom:2px solid #dbeafe;margin-bottom:.1rem}
-        .bill-item-row{display:grid;grid-template-columns:1fr 55px 90px 90px;gap:.4rem;padding:.6rem 0;border-bottom:1px solid #f1f5f9;font-size:.82rem;align-items:center}
+        .bill-items-header{display:grid;grid-template-columns:1fr 55px 90px 90px;gap:.4rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#5589a3;font-weight:700;padding-bottom:.5rem;border-bottom:2px solid #d0e9f5;margin-bottom:.1rem}
+        .bill-item-row{display:grid;grid-template-columns:1fr 55px 90px 90px;gap:.4rem;padding:.6rem 0;border-bottom:1px solid #eaf5fb;font-size:.82rem;align-items:center}
         .bill-item-row:last-child{border-bottom:none}
-        .bill-item-name{font-weight:600;color:#0c1e3d}
-        .bill-item-qty{color:#475569;text-align:center}
-        .bill-item-price{color:#475569;text-align:right;font-size:.78rem}
-        .bill-item-total{color:#1d4ed8;font-weight:700;text-align:right}
-        .bill-summary{margin:0 1.5rem;border-top:2px dashed #e2e8f0;padding:.85rem 0 0;display:flex;flex-direction:column;gap:.35rem}
-        .bill-summary-row{display:flex;justify-content:space-between;font-size:.8rem;color:#475569}
-        .bill-grand{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#0c1e3d,#2563eb);margin:1rem 1.5rem;border-radius:10px;padding:.9rem 1.1rem;color:#fff}
-        .bill-grand-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7}
-        .bill-grand-amount{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
-        .bill-footer{text-align:center;padding:.9rem 1.5rem 1.4rem;border-top:1px dashed #e2e8f0}
-        .bill-thanks{font-family:'Playfair Display',serif;font-size:.95rem;color:#2563eb;margin-bottom:3px}
-        .bill-footer p{font-size:.68rem;color:#94a3b8;line-height:1.65}
+        .bill-item-name{font-weight:700;color:#0d2a38}
+        .bill-item-qty{color:#5589a3;text-align:center;font-weight:600}
+        .bill-item-price{color:#5589a3;text-align:right;font-size:.78rem}
+        .bill-item-total{color:#2a8db5;font-weight:800;text-align:right}
+        .bill-summary{margin:0 1.5rem;border-top:2px dashed #d0e9f5;padding:.85rem 0 0;display:flex;flex-direction:column;gap:.35rem}
+        .bill-summary-row{display:flex;justify-content:space-between;font-size:.8rem;color:#5589a3;font-weight:600}
+        .bill-grand{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1a6e91,#4bafd4);margin:1rem 1.5rem;border-radius:10px;padding:.9rem 1.1rem;color:#fff}
+        .bill-grand-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700}
+        .bill-grand-amount{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+        .bill-footer{text-align:center;padding:.9rem 1.5rem 1.4rem;border-top:1px dashed #d0e9f5}
+        .bill-thanks{font-size:.95rem;font-weight:800;color:#2a8db5;margin-bottom:3px}
+        .bill-footer p{font-size:.68rem;color:#5589a3;line-height:1.65}
     </style></head>
     <body><div class="wrap">${content}</div></body></html>`);
     win.document.close();
