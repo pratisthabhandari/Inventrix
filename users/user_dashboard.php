@@ -446,9 +446,18 @@ html, body {
                 </div>
             </div>
 
-          
+            <div class="stat-card">
+                <div class="stat-card-top">
+                    <div class="stat-icon icon-green"><i class="fa-solid fa-circle-check"></i></div>
+                    <span class="stat-pill pill-green">Verified</span>
+                </div>
+                <div>
+                    <div class="stat-value" style="font-size:1.4rem; color:var(--green);">Active</div>
+                    <div class="stat-label">Account Status</div>
+                </div>
+            </div>
 
-          
+         
 
         </div>
 
