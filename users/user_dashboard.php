@@ -441,16 +441,7 @@ body, .main-content { font-family: var(--font) !important; }
             <div class="stat-label">Profile Complete</div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-card-top">
-                <div class="stat-icon icon-amber"><i class="fa-solid fa-check"></i></div>
-                <span class="stat-trend trend-warn">Session</span>
-            </div>
-            <div class="stat-value" style="font-size:1.1rem;padding-top:0.4rem">
-                <?= htmlspecialchars($_SESSION['last_login'] ?? 'N/A') ?>
-            </div>
-            <div class="stat-label">Last Login</div>
-        </div>
+
     </div>
 
     <!-- Body -->
@@ -509,13 +500,7 @@ body, .main-content { font-family: var(--font) !important; }
                     </div>
                 </div>
 
-                <div class="info-row">
-                    <div class="info-icon"></div>
-                    <div>
-                        <div class="info-label">Last Login</div>
-                        <div class="info-value"><?= htmlspecialchars($_SESSION['last_login'] ?? 'N/A') ?></div>
-                    </div>
-                </div>
+        
 
                 <div class="info-row">
                     <div class="info-icon"></div>
