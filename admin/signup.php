@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg:        #e8f4fb;
+            --bg:        #ffffff;
             --bg2:       #d4ecf7;
             --blue:      #4bafd4;
             --blue-dark: #2a8db5;

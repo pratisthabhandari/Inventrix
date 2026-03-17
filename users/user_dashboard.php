@@ -446,51 +446,16 @@ html, body {
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-card-top">
-                    <div class="stat-icon icon-green"><i class="fa-solid fa-circle-check"></i></div>
-                    <span class="stat-pill pill-green">Verified</span>
-                </div>
-                <div>
-                    <div class="stat-value" style="font-size:1.4rem; color:var(--green);">Active</div>
-                    <div class="stat-label">Account Status</div>
-                </div>
-            </div>
+          
 
-            <div class="stat-card">
-                <div class="stat-card-top">
-                    <div class="stat-icon icon-blue"><i class="fa-solid fa-user"></i></div>
-                    <span class="stat-pill pill-blue">Good</span>
-                </div>
-                <div>
-                    <div class="stat-value">85<span style="font-size:1rem; color:var(--muted); font-weight:700">%</span></div>
-                    <div class="stat-label">Profile Complete</div>
-                </div>
-            </div>
+          
 
         </div>
 
         <!-- Bottom Grid -->
         <div class="bottom-grid">
 
-            <!-- Recent Activity -->
-            <div class="panel">
-                <div class="panel-head">
-                    <div>
-                        <div class="panel-title">Recent Activity</div>
-                        <div class="panel-sub">Your latest checkout transactions</div>
-                    </div>
-                    <span class="panel-tag">History</span>
-                </div>
-                <div id="activityList">
-                    <div class="empty-state">
-                        <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
-                        <p>No recent activity yet</p>
-                        <span>Checkout products to see history here.</span>
-                    </div>
-                </div>
-            </div>
-
+           
             <!-- Profile -->
             <div class="panel">
                 <div class="panel-head">
@@ -527,14 +492,7 @@ html, body {
                             <div class="info-val" id="profileProducts">Loading…</div>
                         </div>
                     </div>
-
-                    <div class="info-row">
-                        <div class="info-ico"><i class="fa-solid fa-shield-check"></i></div>
-                        <div>
-                            <div class="info-lbl">Account Status</div>
-                            <div class="info-val" style="color:var(--green)">● Active</div>
-                        </div>
-                    </div>
+\
 
                 </div>
 

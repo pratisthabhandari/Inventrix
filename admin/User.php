@@ -321,30 +321,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------- Delete User --------
     cancelDelete.addEventListener("click", () => deleteModal.style.display = "none");
 
-    confirmDelete.addEventListener("click", async () => {
-        try {
-            const res = await fetch(`delete_user.php?id=${deleteUserId}`, { method: "DELETE" });
-            const data = await res.json();
-            // if (data.success) {
-            //     document.querySelector(`.user-card[data-user-id='${deleteUserId}']`).remove();
-            //     alert(data.success);
-            // } else alert(data.error);
-            // deleteModal.style.display = "none";
+confirmDelete.addEventListener("click", async () => {
+    try {
+        const res = await fetch(`delete_user.php?id=${deleteUserId}`, { method: "DELETE" });
+        const data = await res.json();
 
-            if (data.success) {
-    document.querySelector(`.user-card[data-user-id='${deleteUserId}']`).remove();
-    showToast(data.success, "success");
-} else {
-    showToast(data.error, "error");
-    deleteModal.style.display = "none";
-}
-
-        } catch (err) {
-            console.error(err);
-            alert("Server error");
-            deleteModal.style.display = "none";
+        if (data.success) {
+            document.querySelector(`.user-card[data-user-id='${deleteUserId}']`).remove();
+            showToast(data.success, "success");
+            deleteModal.style.display = "none";  // ← moved here
+        } else {
+            showToast(data.error, "error");
+            deleteModal.style.display = "none";  // ← also close on error
         }
-    });
+
+    } catch (err) {
+        console.error(err);
+        alert("Server error");
+        deleteModal.style.display = "none";
+    }
+});
 
     // -------- Edit User --------
     document.getElementById("cancelEdit").addEventListener("click", () => editModal.style.display = "none");

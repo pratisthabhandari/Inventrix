@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --bg:        #e8f4fb;
+            --bg:        #ffffff;
             --bg2:       #d4ecf7;
             --blue:      #4bafd4;
             --blue-dark: #2a8db5;
@@ -809,10 +809,7 @@
         <div class="hero-blob hero-blob-3"></div>
 
         <div class="hero-content">
-            <div class="hero-eyebrow">
-                <div class="eyebrow-dot"></div>
-                Smart Inventory Management
-            </div>
+         
 
             <h1 class="hero-title">
                 Manage Your Stock<br>
@@ -820,7 +817,7 @@
             </h1>
 
             <p class="hero-sub">
-                INVENTRIX gives you real-time stock visibility, bulk checkouts, and instant bill generation — beautifully designed for businesses of all sizes.
+                INVENTRIX gives you real-time stock visibility, bulk checkouts, and instant bill generation, beautifully designed for businesses of all sizes.
             </p>
 
             <div class="hero-actions">
